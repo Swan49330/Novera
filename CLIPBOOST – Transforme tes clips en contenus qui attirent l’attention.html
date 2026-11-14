@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CLIPBOOST – Transforme tes clips en contenus qui attirent l’attention</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090f;--bg2:#12121c;--line:#25253a;--tx:#ecebf5;--mu:#9a99b5;--v:#7c3aed;--b:#3b82f6;--g:linear-gradient(120deg,#7c3aed,#3b82f6);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:70px;scroll-behavior:smooth}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Sora,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.5px}.logo b{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{border:1px solid var(--line);background:var(--bg2);padding:9px 16px;border-radius:10px;cursor:pointer;display:inline-block}
+.btn:hover{border-color:var(--v)}.btn:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--b);outline-offset:2px}
+.pri{background:var(--g);border:0;font-weight:600;box-shadow:0 0 24px #7c3aed55}.sm{padding:5px 10px;font-size:13px}
+.wrap{max-width:1080px;margin:auto;padding:0 20px}
+nav.top{position:sticky;top:0;z-index:5;background:#09090fdd;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:18px;height:60px}nav.top .sp{flex:1}nav.top a.l{color:var(--mu)}nav.top a.l:hover{color:var(--tx)}
+.hero{padding:80px 0 50px;text-align:center;background:radial-gradient(600px 300px at 50% 0,#7c3aed40,transparent)}
+.hero h1{font-size:clamp(34px,6vw,62px);line-height:1.05;letter-spacing:-2px;margin:0 0 16px}.hero p{color:var(--mu);max-width:560px;margin:0 auto 26px;font-size:17px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card h3{margin:0 0 6px;font-size:16px}.card p{margin:0;color:var(--mu)}
+section.s{padding:50px 0}section.s>.wrap>h2{font-size:30px;letter-spacing:-1px;margin:0 0 22px}
+.pro{border-color:var(--v);box-shadow:0 0 40px #7c3aed33}.price{font-size:32px;font-weight:800}.price small{font-size:14px;color:var(--mu);font-weight:400}
+ul.ck{padding-left:18px;color:var(--mu)}details{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--mu);font-size:13px}
+.demo{background:#3b82f61f;border:1px solid #3b82f655;border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:16px;color:#b9d2ff}
+/* app */
+.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+.side{border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh;overflow:auto;background:var(--bg)}
+.side a{display:block;padding:9px 12px;border-radius:10px;color:var(--mu);margin:2px 0}.side a.on,.side a:hover{background:var(--bg2);color:var(--tx)}.side a.on{box-shadow:inset 3px 0 var(--v)}
+.main{padding:24px;max-width:900px;width:100%}.main h1{margin:0 0 18px;font-size:26px;letter-spacing:-.8px}
+.mb{display:none}
+.f{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:14px}
+label{display:block;font-size:13px;color:var(--mu)}input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-top:4px}
+.res{margin-top:12px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.res small{color:var(--mu);display:block}
+.kpi{font-size:28px;font-weight:800}.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal div{min-height:58px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:4px;font-size:12px;cursor:pointer;overflow:hidden}
+.cal .h{min-height:0;background:none;border:0;cursor:default;color:var(--mu);text-align:center}.cal i{display:block;font-style:normal;background:var(--g);border-radius:4px;padding:0 4px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--v);padding:10px 18px;border-radius:10px;z-index:9}
+.err{color:#ff8a8a;font-size:13px}.wide{overflow-x:auto}
+@media(max-width:760px){.app{display:block}.side{display:none;position:fixed;inset:0 30% 0 0;z-index:8;height:100%}.side.open{display:block}.mb{display:inline-block;margin-bottom:12px}.main{padding:16px}nav.top .l{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body><div id="root"></div><div id="t"></div>
+<script>
+const mem={};const S={get(k,d){try{const v=localStorage.getItem('cb_'+k);return v?JSON.parse(v):(mem[k]??d)}catch(e){return mem[k]??d}},set(k,v){mem[k]=v;try{localStorage.setItem('cb_'+k,JSON.stringify(v))}catch(e){}}};
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const GAMES=['Fortnite','Call of Duty Warzone','GTA','Minecraft','Apex Legends','Valorant','Rocket League'];
+const toast=m=>{$('#t').innerHTML='<div class="toast" role="status">'+esc(m)+'</div>';setTimeout(()=>$('#t').innerHTML='',1800)};
+const pick=(a,n)=>a[Math.floor(Math.random()*a.length)];
+let st={gen:null,ideas:null,mo:0,edit:null,err:''};
+const DEMO='<div class="demo">Mode démo : tes données restent dans ce navigateur. Supabase et l’IA ne sont pas encore connectés (voir « Paramètres »).</div>';
+/* ---------- landing ---------- */
+function landing(){return `<nav class="top"><div class="wrap"><a href="#/" class="logo">CLIP<b>BOOST</b></a><span class="sp"></span><a class="l" href="#fonctionnalites">Fonctionnalités</a><a class="l" href="#tarifs">Tarifs</a><a class="l" href="#faq">FAQ</a><a class="btn sm" href="#/app/overview">Connexion</a><a class="btn pri sm" href="#/app/overview">Commencer gratuitement</a></div></nav>
+<header class="hero"><div class="wrap"><h1>Transforme tes clips en contenus qui attirent l’attention.</h1><p>Accroches, titres, hashtags, idées de vidéos, calendrier et suivi de stats pour tes clips Fortnite, Warzone, GTA, Minecraft ou Apex.</p><a class="btn pri" href="#/app/generator">Essayer le générateur</a></div></header>
+<section class="s" id="fonctionnalites"><div class="wrap"><h2>Tout ce qu’il faut pour publier régulièrement</h2><div class="grid">
+<div class="card"><h3>Générateur d’accroches</h3><p>Accroche, titre, description, hashtags et texte à l’écran pour TikTok, Shorts ou Reels.</p></div>
+<div class="card"><h3>Idées de vidéos</h3><p>Concept, déroulé, durée conseillée et montage pour le jeu de ton choix.</p></div>
+<div class="card"><h3>Calendrier</h3><p>Planifie chaque publication par date et plateforme.</p></div>
+<div class="card"><h3>Statistiques</h3><p>Saisis tes vues, likes, commentaires et abonnés, puis suis ta progression.</p></div></div></div></section>
+<section class="s"><div class="wrap"><h2>Comment ça marche</h2><div class="grid"><div class="card"><h3>1. Choisis ton clip</h3><p>Jeu, type de clip, plateforme, style et ton.</p></div><div class="card"><h3>2. Génère et copie</h3><p>Copie chaque élément ou garde-le en favori.</p></div><div class="card"><h3>3. Planifie et mesure</h3><p>Ajoute la publication au calendrier, puis note tes résultats.</p></div></div></div></section>
+<section class="s" id="tarifs"><div class="wrap"><h2>Tarifs</h2><div class="grid">
+${plan('FREE','0 €',['3 générations par semaine','Accès limité aux idées','Calendrier basique'])}${plan('PRO','5,99 €',['Générations étendues','Toutes les idées','Calendrier complet','Favoris'],1)}${plan('PREMIUM','9,99 €',['Tout le plan Pro','Limites de génération plus élevées','Outils avancés','Statistiques complètes'])}</div></div></section>
+<section class="s" id="faq"><div class="wrap"><h2>Questions fréquentes</h2>
+<details><summary>L’IA est-elle réelle ?</summary><p>Dans cette démo, les textes viennent de modèles locaux. Une vraie IA se branche via une fonction serveur avec ta clé API.</p></details>
+<details><summary>Les stats viennent-elles de TikTok ?</summary><p>Non. Tu les saisis toi-même, sans intégration officielle pour l’instant.</p></details>
+<details><summary>Puis-je payer ?</summary><p>Oui, par carte via Stripe, depuis la page Abonnement. Ton offre est activée à la main après paiement tant que la synchronisation automatique n’est pas en place.</p></details>
+<details><summary>Mes données sont-elles sauvegardées ?</summary><p>Dans ton navigateur uniquement, tant que Supabase n’est pas configuré.</p></details></div></section>
+<footer><div class="wrap row"><span class="logo">CLIP<b>BOOST</b></span><span>© 2026 CLIPBOOST · <a href="#/app/settings">Paramètres</a></span></div></footer>`}
+function plan(n,p,l,hi){return `<div class="card ${hi?'pro':''}"><h3>${n}${hi?' · le plus choisi':''}</h3><div class="price">${p}<small>/mois</small></div><ul class="ck">${l.map(x=>'<li>'+x+'</li>').join('')}</ul><a class="btn ${hi?'pri':''}" href="#/app/subscription">${n=='FREE'?'Commencer':'Choisir '+n}</a></div>`}
+/* ---------- app ---------- */
+const NAV=[['overview','Vue d’ensemble'],['generator','Générateur IA'],['ideas','Idées de vidéos'],['calendar','Calendrier'],['stats','Mes statistiques'],['favs','Favoris'],['settings','Paramètres'],['subscription','Abonnement']];
+function shell(p,body){return `<div class="app"><aside class="side" id="sd"><a href="#/" class="logo" style="display:block;padding:8px 12px 16px">CLIP<b>BOOST</b></a>${NAV.map(([k,l])=>`<a href="#/app/${k}" class="${k==p?'on':''}">${l}</a>`).join('')}<a href="#/" data-a="out">Déconnexion</a></aside><main class="main"><button class="btn mb sm" data-a="menu">Menu</button>${DEMO}${body}</main></div>`}
+const gens=()=>S.get('gens',[]),favs=()=>S.get('favs',[]),posts=()=>S.get('posts',[]),stats=()=>S.get('stats',[]);
+function overview(){const up=posts().filter(p=>p.date>=new Date().toISOString().slice(0,10)).length;
+const k=(n,l)=>`<div class="card"><div class="kpi">${n}</div>${l}</div>`;
+return `<h1>Vue d’ensemble</h1><div class="grid">${k(gens().length,'contenus générés')}${k(favs().length,'idées et contenus en favoris')}${k(up,'publications prévues')}</div><h3>Accès rapide</h3><p><a class="btn pri" href="#/app/generator">Générer</a> <a class="btn" href="#/app/ideas">Idées</a> <a class="btn" href="#/app/calendar">Planifier</a> <a class="btn" href="#/app/stats">Stats</a></p><h3>Activité récente</h3>${gens().slice(0,5).map(g=>`<div class="card" style="margin-bottom:8px">${esc(g.hook)}<small style="color:var(--mu)"> · ${esc(g.game)}</small></div>`).join('')||'<p style="color:var(--mu)">Rien pour l’instant. Génère ta première accroche.</p>'}`}
+const opt=(a,v)=>a.map(x=>`<option${x==v?' selected':''}>${x}</option>`).join('');
+function generator(){const g=st.gen;
+const rows=g?[['Accroche',g.hook],['Titre',g.title],['Description',g.desc],['Hashtags',g.tags],['Texte à l’écran',g.screen]]:[];
+return `<h1>Générateur IA</h1><div class="card"><div class="f"><label>Jeu<select id="game">${opt(GAMES,g&&g.game)}</select></label><label>Type de clip<input id="clip" value="${esc(g?g.clip:'clutch')}"></label><label>Plateforme<select id="plat">${opt(['TikTok','Shorts','Reels'],g&&g.plat)}</select></label><label>Style<select id="style">${opt(['drôle','tryhard','spectaculaire','compétitif','storytelling'],g&&g.style)}</select></label><label>Ton<select id="tone">${opt(['professionnel','humoristique','agressif','mystérieux'],g&&g.tone)}</select></label></div><button class="btn pri" data-a="gen">GÉNÉRER</button> <small style="color:var(--mu)">Modèles locaux : aucune clé API d’IA n’est configurée.</small></div>
+${rows.map(([l,v],i)=>`<div class="card res"><div><small>${l}</small>${esc(v)}</div><div><button class="btn sm" data-a="copy" data-v="${esc(v)}">Copier</button></div></div>`).join('')}
+${g?`<p><button class="btn sm" data-a="gen">Régénérer</button> <button class="btn sm" data-a="favgen">Enregistrer en favoris</button></p>`:''}`}
+function doGen(){const v=id=>$('#'+id).value,game=v('game'),clip=v('clip').trim()||'clip',plat=v('plat'),style=v('style'),tone=v('tone');
+const H=[`Personne ne croit que ce ${clip} sur ${game} est réel`,`J’ai tenté ce ${clip} sur ${game}. Regarde la fin`,`3 secondes pour comprendre ce ${clip} sur ${game}`,`Ce ${clip} sur ${game} n’aurait pas dû être possible`];
+const T={professionnel:'Analyse rapide du geste.',humoristique:'Je n’ai aucune explication.',agressif:'Fais mieux, je t’attends.',mystérieux:'Tu as vu le détail ?'}[tone];
+const tag=game.replace(/\s/g,'');const g={game,clip,plat,style,tone,hook:pick(H),title:`${clip[0].toUpperCase()+clip.slice(1)} ${style} sur ${game}`,desc:`${T} Clip ${style} sur ${game}, pensé pour ${plat}. Dis-moi en commentaire si tu l’aurais tenté.`,tags:`#${tag} #gaming #${clip.replace(/\s/g,'')} #${plat.toLowerCase()} #fyp`,screen:style=='drôle'?'Attends la fin…':style=='compétitif'?'Top 1 ?':'Regarde bien'};
+st.gen=g;S.set('gens',[g,...gens()].slice(0,100));render()}
+const IDEAS=g=>[['Le clutch impossible',`Montre un 1 contre 3 sur ${g}`,'Début : la situation. Milieu : le choix risqué. Fin : le résultat.','Tu vas me dire que c’est faux','20 s','Ralenti sur l’action clé, zoom, sous-titres'],
+['Avant / après',`Même situation sur ${g}, deux façons de jouer`,'Version ratée puis version réussie.','Voilà pourquoi tu perds','25 s','Écran partagé, compteur'],
+['Le fail du jour',`Ton pire moment sur ${g}`,'Mise en place calme, puis erreur.','Je n’aurais jamais dû faire ça','15 s','Effet sonore, arrêt sur image'],
+['Astuce en 15 secondes',`Une astuce peu connue sur ${g}`,'Problème, astuce, preuve.','Personne ne t’a montré ça','15 s','Texte animé, flèches'],
+['Défi chrono',`Un défi à réaliser sur ${g} en 30 s`,'Règle, tentative, verdict.','Je me donne 30 secondes','30 s','Chronomètre visible']];
+function ideas(){const g=st.ideas||GAMES[0];return `<h1>Idées de vidéos</h1><label style="max-width:260px">Jeu<select id="ig" data-a="ig">${opt(GAMES,g)}</select></label><br>${IDEAS(g).map((x,i)=>`<div class="card" style="margin-bottom:10px"><div class="row"><h3>${x[0]}</h3><button class="btn sm" data-a="favidea" data-i="${i}">Favori</button></div><p><b>Concept :</b> ${esc(x[1])}<br><b>Déroulement :</b> ${x[2]}<br><b>Accroche :</b> ${x[3]}<br><b>Durée conseillée :</b> ${x[4]}<br><b>Montage :</b> ${x[5]}</p></div>`).join('')}`}
+function calendar(){const d=new Date();d.setDate(1);d.setMonth(d.getMonth()+st.mo);const y=d.getFullYear(),m=d.getMonth(),off=(d.getDay()+6)%7,n=new Date(y,m+1,0).getDate();
+const iso=day=>`${y}-${String(m+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;const P=posts();let c='';['L','M','M','J','V','S','D'].forEach(x=>c+=`<div class="h">${x}</div>`);
+for(let i=0;i<off;i++)c+='<div class="h"></div>';for(let i=1;i<=n;i++)c+=`<div data-a="day" data-d="${iso(i)}">${i}${P.filter(p=>p.date==iso(i)).map(p=>`<i>${esc(p.title)}</i>`).join('')}</div>`;
+const e=st.edit||{id:'',title:'',date:new Date().toISOString().slice(0,10),plat:'TikTok'};const t=new Date().toISOString().slice(0,10);
+return `<h1>Calendrier</h1><div class="row" style="margin-bottom:10px"><button class="btn sm" data-a="mo" data-n="-1">←</button><b>${d.toLocaleDateString('fr-FR',{month:'long',year:'numeric'})}</b><button class="btn sm" data-a="mo" data-n="1">→</button></div><div class="cal">${c}</div>
+<div class="card" style="margin:16px 0"><div class="f"><label>Titre<input id="pt" value="${esc(e.title)}"></label><label>Date<input type="date" id="pd" value="${e.date}"></label><label>Plateforme<select id="pp">${opt(['TikTok','Shorts','Reels'],e.plat)}</select></label></div><div class="err">${st.err}</div><button class="btn pri" data-a="savepost" data-id="${e.id}">${e.id?'Enregistrer':'Ajouter'}</button></div>
+<h3>À venir</h3>${P.filter(p=>p.date>=t).sort((a,b)=>a.date.localeCompare(b.date)).map(p=>`<div class="card row" style="margin-bottom:8px"><span>${p.date} · ${p.plat} · ${esc(p.title)}</span><span><button class="btn sm" data-a="editpost" data-id="${p.id}">Modifier</button> <button class="btn sm" data-a="delpost" data-id="${p.id}">Supprimer</button></span></div>`).join('')||'<p style="color:var(--mu)">Aucune publication à venir.</p>'}`}
+function chart(S2,key){if(S2.length<2)return '<p style="color:var(--mu)">Ajoute au moins deux relevés pour voir la courbe.</p>';const v=S2.map(x=>+x[key]),mx=Math.max(...v,1),w=600,h=160;const pts=v.map((a,i)=>`${i*w/(v.length-1)},${h-a/mx*(h-10)-5}`).join(' ');return `<div class="wide"><svg viewBox="0 0 ${w} ${h}" width="100%" style="min-width:320px"><defs><linearGradient id="lg"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><polyline fill="none" stroke="url(#lg)" stroke-width="3" points="${pts}"/></svg></div>`}
+function statsP(){const S2=stats().slice().sort((a,b)=>a.date.localeCompare(b.date)),sum=k=>S2.reduce((a,x)=>a+(+x[k]||0),0),last=S2.length?S2[S2.length-1].followers:0;
+const k=(n,l)=>`<div class="card"><div class="kpi">${n}</div>${l}</div>`;
+return `<h1>Mes statistiques</h1><div class="demo">Saisie manuelle : aucune donnée n’est importée depuis TikTok, YouTube ou Instagram.</div><div class="grid">${k(sum('views'),'vues')}${k(sum('likes'),'likes')}${k(sum('comments'),'commentaires')}${k(last,'abonnés (dernier relevé)')}</div>
+<div class="card" style="margin:16px 0"><h3>Évolution des vues</h3>${chart(S2,'views')}</div>
+<div class="card"><div class="f"><label>Date<input type="date" id="sd2" value="${new Date().toISOString().slice(0,10)}"></label><label>Vues<input type="number" min="0" id="sv"></label><label>Likes<input type="number" min="0" id="sl"></label><label>Commentaires<input type="number" min="0" id="sc"></label><label>Abonnés<input type="number" min="0" id="sf"></label></div><div class="err">${st.err}</div><button class="btn pri" data-a="savestat">Ajouter le relevé</button></div>`}
+function favsP(){return `<h1>Favoris</h1>${favs().map((f,i)=>`<div class="card row" style="margin-bottom:8px"><span>${esc(f)}</span><span><button class="btn sm" data-a="copy" data-v="${esc(f)}">Copier</button> <button class="btn sm" data-a="delfav" data-i="${i}">Retirer</button></span></div>`).join('')||'<p style="color:var(--mu)">Aucun favori. Enregistre un contenu depuis le générateur ou les idées.</p>'}`}
+function settings(){const pr=S.get('profile',{name:'',email:''});return `<h1>Paramètres</h1><div class="card"><h3>Profil (stocké dans ce navigateur)</h3><div class="f"><label>Nom<input id="pn" value="${esc(pr.name)}"></label><label>E-mail<input id="pe" type="email" value="${esc(pr.email)}"></label></div><button class="btn pri" data-a="saveprof">Enregistrer</button> <button class="btn" data-a="wipe">Effacer mes données</button></div>
+<div class="card" style="margin-top:14px"><h3>Connecter les services</h3><p>Inscription, connexion et mot de passe oublié demandent Supabase : crée un projet, puis renseigne SUPABASE_URL et la clé « anon » dans les variables d’environnement du projet React. La clé d’IA et la clé secrète Stripe restent côté serveur (fonctions Supabase), jamais dans le navigateur.</p></div>`}
+function subscription(){return `<h1>Abonnement</h1><div class="card" style="margin-bottom:14px">Offre actuelle : <b>FREE</b> (démo)</div><div class="grid">${plan('PRO','5,99 €',['Générations étendues','Toutes les idées','Calendrier complet','Favoris'],1).replace(/<a class.*?<\/a>/,'<button class="btn pri" data-a="stripe" data-u="https://buy.stripe.com/aFa28r41cgmGb3ObYD6Vq07">Passer à PRO</button>')}${plan('PREMIUM','9,99 €',['Tout le plan Pro','Limites plus élevées','Outils avancés','Statistiques complètes']).replace(/<a class.*?<\/a>/,'<button class="btn" data-a="stripe" data-u="https://buy.stripe.com/fZudR90P06M6fk46Ej6Vq08">Passer à PREMIUM</button>')}</div>`}
+const PAGES={overview,generator,ideas,calendar,stats:statsP,favs:favsP,settings,subscription};
+function render(){const h=location.hash||'#/';const m=h.match(/^#\/app\/(\w+)/);if(!m){if(/^#\/?$/.test(h)||!h.startsWith('#/'))$('#root').innerHTML=landing();else $('#root').innerHTML=landing();return}
+const p=PAGES[m[1]]?m[1]:'overview';$('#root').innerHTML=shell(p,PAGES[p]())}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;const a=el.dataset.a,d=el.dataset;
+if(a=='menu')$('#sd').classList.toggle('open');
+else if(a=='gen')doGen();
+else if(a=='copy'){(navigator.clipboard?navigator.clipboard.writeText(d.v):Promise.reject()).then(()=>toast('Copié'),()=>toast('Copie impossible : sélectionne le texte à la main'))}
+else if(a=='favgen'){S.set('favs',[st.gen.hook+' — '+st.gen.title,...favs()]);toast('Ajouté aux favoris')}
+else if(a=='favidea'){const g=st.ideas||GAMES[0],x=IDEAS(g)[d.i];S.set('favs',[g+' : '+x[0]+' — '+x[1],...favs()]);toast('Ajouté aux favoris')}
+else if(a=='delfav'){const f=favs();f.splice(+d.i,1);S.set('favs',f);render()}
+else if(a=='mo'){st.mo+=+d.n;render()}
+else if(a=='day'){st.edit={id:'',title:'',date:d.d,plat:'TikTok'};render()}
+else if(a=='savepost'){const title=$('#pt').value.trim(),date=$('#pd').value;if(!title||!date){st.err='Indique un titre et une date.';return render()}st.err='';let P=posts();const o={id:d.id||String(Date.now()),title,date,plat:$('#pp').value};P=d.id?P.map(x=>x.id==d.id?o:x):[...P,o];S.set('posts',P);st.edit=null;toast(d.id?'Modifié':'Ajouté');render()}
+else if(a=='editpost'){st.edit=posts().find(x=>x.id==d.id);render();scrollTo(0,document.body.scrollHeight)}
+else if(a=='delpost'){S.set('posts',posts().filter(x=>x.id!=d.id));render()}
+else if(a=='savestat'){const o={id:Date.now(),date:$('#sd2').value,views:$('#sv').value,likes:$('#sl').value,comments:$('#sc').value,followers:$('#sf').value};if(!o.date||o.views===''){st.err='Indique au moins la date et les vues.';return render()}st.err='';S.set('stats',[...stats(),o]);toast('Relevé ajouté');render()}
+else if(a=='saveprof'){S.set('profile',{name:$('#pn').value,email:$('#pe').value});toast('Profil enregistré')}
+else if(a=='wipe'){if(confirm('Effacer toutes les données de ce navigateur ?')){['gens','favs','posts','stats','profile'].forEach(k=>S.set(k,k=='profile'?{name:'',email:''}:[]));render()}}
+else if(a=='stripe'){window.open(d.u,'_blank','noopener');toast('Paiement Stripe ouvert dans un nouvel onglet')}
+else if(a=='out')toast('Déconnecté (mode démo)')});
+document.addEventListener('change',e=>{if(e.target.dataset.a=='ig'){st.ideas=e.target.value;render()}});
+addEventListener('hashchange',()=>{if(location.hash&&!location.hash.startsWith('#/'))return;st.err='';render();if(location.hash.startsWith('#/app'))scrollTo(0,0)});render();
+</script></body></html>
