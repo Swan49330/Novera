@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CLIPBOOST – Transforme tes clips en contenus qui attirent l’attention</title>
+<title>Novera – Transforme tes clips en contenus qui attirent l’attention</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<link rel="preconnect" href="https://pdgeqlxyimkwiizkqcul.supabase.co"><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#09090f;--bg2:#12121c;--line:#25253a;--tx:#ecebf5;--mu:#9a99b5;--v:#7c3aed;--b:#3b82f6;--g:linear-gradient(120deg,#7c3aed,#3b82f6);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -42,8 +43,14 @@ label{display:block;font-size:13px;color:var(--mu)}input,select,textarea{width:1
 .err{color:#ff8a8a;font-size:13px}.wide{overflow-x:auto}
 .ld{position:fixed;inset:0;background:#09090fe8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:20}.bar{width:260px;height:8px;background:var(--bg2);border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--g)}
 @media(max-width:760px){.app{display:block}.side{display:none;position:fixed;inset:0 30% 0 0;z-index:8;height:100%}.side.open{display:block}.mb{display:inline-block;margin-bottom:12px}.main{padding:16px}nav.top .l{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style></head><body><div id="root"></div><div id="t"></div>
+a,button,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btn,.card,.side a,.cal div,input,select{transition:transform .15s ease,border-color .2s,background .2s,box-shadow .2s}
+.btn:active{transform:scale(.97)}.card:hover{border-color:#3a3a5c}.btn:disabled{opacity:.6;cursor:wait}
+.pg{animation:fi .3s ease}@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.boot{min-height:100vh;display:flex;align-items:center;justify-content:center}.boot i{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--v);animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.ld::before{content:"";width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--v);animation:sp .8s linear infinite}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pg,.boot i,.ld::before{animation:none}.btn,.card{transition:none}}
+</style></head><body><div id="root"><div class="boot"><i></i></div></div><div id="t"></div>
 <script>
 const SB_URL='https://pdgeqlxyimkwiizkqcul.supabase.co',SB_KEY='sb_publishable_NJ_OcIu-TYIL8KLuv9rf6w_haVv3R3q',ADMIN_EMAIL='derouetswan@gmail.com';
 const sb=(!SB_KEY.startsWith('COLLE')&&window.supabase)?window.supabase.createClient(SB_URL,SB_KEY):null;
@@ -56,7 +63,7 @@ const pick=(a,n)=>a[Math.floor(Math.random()*a.length)];
 let st={gen:null,ideas:null,mo:0,edit:null,err:''};
 const DEMO='';
 /* ---------- landing ---------- */
-function landing(){return `<nav class="top"><div class="wrap"><a href="#/" class="logo">CLIP<b>BOOST</b></a><span class="sp"></span><a class="l" href="#fonctionnalites">Fonctionnalités</a><a class="l" href="#tarifs">Tarifs</a><a class="l" href="#faq">FAQ</a><a class="btn sm" href="#/login">Connexion</a><a class="btn pri sm" href="#/signup">Commencer gratuitement</a></div></nav>
+function landing(){return `<nav class="top"><div class="wrap"><a href="#/" class="logo">No<b>vera</b></a><span class="sp"></span><a class="l" href="#fonctionnalites">Fonctionnalités</a><a class="l" href="#tarifs">Tarifs</a><a class="l" href="#faq">FAQ</a><a class="btn sm" href="#/login">Connexion</a><a class="btn pri sm" href="#/signup">Commencer gratuitement</a></div></nav>
 <header class="hero"><div class="wrap"><h1>Transforme tes clips en contenus qui attirent l’attention.</h1><p>Accroches, titres, hashtags, idées de vidéos, calendrier et suivi de stats pour tes clips Fortnite, Warzone, GTA, Minecraft ou Apex.</p><a class="btn pri" href="#/signup">Commencer gratuitement</a></div></header>
 <section class="s" id="fonctionnalites"><div class="wrap"><h2>Tout ce qu’il faut pour publier régulièrement</h2><div class="grid">
 <div class="card"><h3>Générateur d’accroches</h3><p>Accroche, titre, description, hashtags et texte à l’écran pour TikTok, Shorts ou Reels.</p></div>
@@ -71,11 +78,11 @@ ${plan('FREE','0 €',['3 générations par semaine','Accès limité aux idées'
 <details><summary>Les stats viennent-elles de TikTok ?</summary><p>Non. Tu les saisis toi-même, sans intégration officielle pour l’instant.</p></details>
 <details><summary>Puis-je payer ?</summary><p>Oui, par carte via Stripe, depuis la page Abonnement. Ton offre est activée à la main après paiement tant que la synchronisation automatique n’est pas en place.</p></details>
 <details><summary>Mes données sont-elles sauvegardées ?</summary><p>Oui, sur ton compte, avec des règles d’accès qui isolent les données de chaque utilisateur.</p></details></div></section>
-<footer><div class="wrap row"><span class="logo">CLIP<b>BOOST</b></span><span>© 2026 CLIPBOOST · <a href="#/login">Connexion</a></span></div></footer>`}
+<footer><div class="wrap row"><span class="logo">No<b>vera</b></span><span>© 2026 Novera · <a href="#/login">Connexion</a></span></div></footer>`}
 function plan(n,p,l,hi){return `<div class="card ${hi?'pro':''}"><h3>${n}${hi?' · le plus choisi':''}</h3><div class="price">${p}<small>/mois</small></div><ul class="ck">${l.map(x=>'<li>'+x+'</li>').join('')}</ul><a class="btn ${hi?'pri':''}" href="#/signup">${n=='FREE'?'Commencer':'Choisir '+n}</a></div>`}
 /* ---------- app ---------- */
 const NAV=[['overview','Vue d’ensemble'],['generator','Générateur IA'],['ideas','Idées de vidéos'],['calendar','Calendrier'],['montage','Montage vidéo'],['stats','Mes statistiques'],['favs','Favoris'],['settings','Paramètres'],['subscription','Abonnement']];
-function shell(p,body){return `<div class="app"><aside class="side" id="sd"><a href="#/" class="logo" style="display:block;padding:8px 12px 16px">CLIP<b>BOOST</b></a>${NAV.map(([k,l])=>`<a href="#/app/${k}" class="${k==p?'on':''}">${l}</a>`).join('')}<div style="padding:8px 12px;font-size:12px;color:var(--mu);word-break:break-all">${esc(USER.email)}${ADMIN?' · Admin':''}</div><a href="#/" data-a="out">Déconnexion</a></aside><main class="main"><button class="btn mb sm" data-a="menu">Menu</button>${DEMO}${body}</main></div>`}
+function shell(p,body){return `<div class="app"><aside class="side" id="sd"><a href="#/" class="logo" style="display:block;padding:8px 12px 16px">No<b>vera</b></a>${NAV.map(([k,l])=>`<a href="#/app/${k}" class="${k==p?'on':''}">${l}</a>`).join('')}<div style="padding:8px 12px;font-size:12px;color:var(--mu);word-break:break-all">${esc(USER.email)}${ADMIN?' · Admin':''}</div><a href="#/" data-a="out">Déconnexion</a></aside><main class="main"><button class="btn mb sm" data-a="menu">Menu</button>${DEMO}${body}</main></div>`}
 const gens=()=>S.get('gens',[]),favs=()=>S.get('favs',[]),posts=()=>S.get('posts',[]),stats=()=>S.get('stats',[]);
 function overview(){const up=posts().filter(p=>p.date>=new Date().toISOString().slice(0,10)).length;
 const k=(n,l)=>`<div class="card"><div class="kpi">${n}</div>${l}</div>`;
@@ -91,7 +98,7 @@ const H=[`Personne ne croit que ce ${clip} sur ${game} est réel`,`J’ai tenté
 const T={professionnel:'Analyse rapide du geste.',humoristique:'Je n’ai aucune explication.',agressif:'Fais mieux, je t’attends.',mystérieux:'Tu as vu le détail ?'}[tone];
 const tag=game.replace(/\s/g,'');const g={game,clip,plat,style,tone,hook:pick(H),title:`${clip[0].toUpperCase()+clip.slice(1)} ${style} sur ${game}`,desc:`${T} Clip ${style} sur ${game}, pensé pour ${plat}. Dis-moi en commentaire si tu l’aurais tenté.`,tags:`#${tag} #gaming #${clip.replace(/\s/g,'')} #${plat.toLowerCase()} #fyp`,screen:style=='drôle'?'Attends la fin…':style=='compétitif'?'Top 1 ?':'Regarde bien'};
 st.gen=g;S.set('gens',[g,...gens()].slice(0,100));render()}
-async function doGen(){const r=await sb.rpc('use_generation');if(r.error){st.err='Erreur : '+r.error.message;return render()}if(!r.data.ok){st.err='Limite de la semaine atteinte. Passe à une offre supérieure.';return render()}st.err='';buildGen();quota().then(render)}
+async function doGen(){const r=await sb.rpc('use_generation');if(r.error){st.err='Erreur : '+r.error.message;return render()}if(!r.data.ok){st.err='Limite de la semaine atteinte. Passe à une offre supérieure.';return render()}st.err='';await quota();buildGen()}
 const IDEAS=g=>[['Le clutch impossible',`Montre un 1 contre 3 sur ${g}`,'Début : la situation. Milieu : le choix risqué. Fin : le résultat.','Tu vas me dire que c’est faux','20 s','Ralenti sur l’action clé, zoom, sous-titres'],
 ['Avant / après',`Même situation sur ${g}, deux façons de jouer`,'Version ratée puis version réussie.','Voilà pourquoi tu perds','25 s','Écran partagé, compteur'],
 ['Le fail du jour',`Ton pire moment sur ${g}`,'Mise en place calme, puis erreur.','Je n’aurais jamais dû faire ça','15 s','Effet sonore, arrêt sur image'],
@@ -138,7 +145,7 @@ const tr=[...c.captureStream(30).getVideoTracks(),...v.captureStream().getAudioT
 const draw=()=>{if(!run)return;x.drawImage(v,0,0,c.width,c.height);x.font='800 '+fs+'px Sora,sans-serif';x.shadowColor='#000a';x.shadowBlur=6;x.fillStyle='#fff';x.fillText('Novera',fs*.6,fs*1.5);load('Montage en cours, garde cet écran ouvert…',Math.min(1,(v.currentTime-s)/(e-s)));if(v.currentTime>=e||v.ended){run=false;v.pause();rec.stop();return}requestAnimationFrame(draw)};
 vEnd=0;load('Montage en cours…',0);rec.start();v.play();draw();await done;unload();vres.push(URL.createObjectURL(new Blob(ch,{type:rec.mimeType||'video/webm'})));showRes();toast('Extrait prêt')}catch(q){unload();vErr('La découpe a échoué : '+q.message)}}
 const PAGES={overview,generator,ideas,calendar,montage,stats:statsP,favs:favsP,settings,subscription};
-function authView(){const su=mode=='signup',fg=mode=='forgot',rs=mode=='reset';return `<div class="wrap" style="max-width:400px;padding-top:70px"><a href="#/" class="logo" style="display:block;text-align:center;margin-bottom:20px;font-size:26px">CLIP<b>BOOST</b></a><div class="card"><h3>${su?'Créer ton compte':fg?'Mot de passe oublié':rs?'Nouveau mot de passe':'Connexion'}</h3>${rs?'':'<label>Adresse e-mail<input id="ae" type="email" autocomplete="email"></label>'}${fg?'':`<label style="margin-top:10px">${rs?'Nouveau mot de passe':'Mot de passe'}<input id="ap" type="password" minlength="8" autocomplete="${su||rs?'new':'current'}-password"></label>`}<div class="err" id="am" style="margin-top:8px"></div><p><button class="btn pri" data-a="auth" style="width:100%">${su?'Créer mon compte':fg?'Envoyer le lien':rs?'Enregistrer':'Se connecter'}</button></p><p style="font-size:13px;color:var(--mu)">${su?'<a href="#/login" style="color:var(--b)">J’ai déjà un compte</a>':'<a href="#/signup" style="color:var(--b)">Créer un compte</a> · <a href="#/forgot" style="color:var(--b)">Mot de passe oublié</a>'}</p></div></div>`}
+function authView(){const su=mode=='signup',fg=mode=='forgot',rs=mode=='reset';return `<div class="wrap" style="max-width:400px;padding-top:70px"><a href="#/" class="logo" style="display:block;text-align:center;margin-bottom:20px;font-size:26px">No<b>vera</b></a><div class="card"><h3>${su?'Créer ton compte':fg?'Mot de passe oublié':rs?'Nouveau mot de passe':'Connexion'}</h3>${rs?'':'<label>Adresse e-mail<input id="ae" type="email" autocomplete="email"></label>'}${fg?'':`<label style="margin-top:10px">${rs?'Nouveau mot de passe':'Mot de passe'}<input id="ap" type="password" minlength="8" autocomplete="${su||rs?'new':'current'}-password"></label>`}<div class="err" id="am" style="margin-top:8px"></div><p><button class="btn pri" data-a="auth" style="width:100%">${su?'Créer mon compte':fg?'Envoyer le lien':rs?'Enregistrer':'Se connecter'}</button></p><p style="font-size:13px;color:var(--mu)">${su?'<a href="#/login" style="color:var(--b)">J’ai déjà un compte</a>':'<a href="#/signup" style="color:var(--b)">Créer un compte</a> · <a href="#/forgot" style="color:var(--b)">Mot de passe oublié</a>'}</p></div></div>`}
 function aerr(m){const x=$('#am');if(x)x.textContent=m}
 async function doAuth(){const e=$('#ae')?$('#ae').value.trim():'',p=$('#ap')?$('#ap').value:'';aerr('');
 if(mode=='reset'){if(p.length<8)return aerr('8 caractères minimum.');const r=await sb.auth.updateUser({password:p});if(r.error)return aerr(r.error.message);location.hash='#/app/overview';return}
@@ -157,7 +164,7 @@ const a=h.match(/^#\/(login|signup|forgot|reset)/);if(a){if(USER&&a[1]!='reset')
 $('#root').innerHTML=landing()}
 document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;const a=el.dataset.a,d=el.dataset;
 if(a=='menu')$('#sd').classList.toggle('open');
-else if(a=='gen')doGen();
+else if(a=='gen'){el.disabled=true;el.textContent='Génération…';doGen().finally(()=>{el.disabled=false})}
 else if(a=='copy'){(navigator.clipboard?navigator.clipboard.writeText(d.v):Promise.reject()).then(()=>toast('Copié'),()=>toast('Copie impossible : sélectionne le texte à la main'))}
 else if(a=='favgen'){S.set('favs',[st.gen.hook+' — '+st.gen.title,...favs()]);toast('Ajouté aux favoris')}
 else if(a=='favidea'){const g=st.ideas||GAMES[0],x=IDEAS(g)[d.i];S.set('favs',[g+' : '+x[0]+' — '+x[1],...favs()]);toast('Ajouté aux favoris')}
@@ -172,10 +179,10 @@ else if(a=='saveprof'){S.set('profile',{name:$('#pn').value,email:$('#pe').value
 else if(a=='wipe'){if(confirm('Effacer toutes les données de ce navigateur ?')){['gens','favs','posts','stats','profile'].forEach(k=>S.set(k,k=='profile'?{name:'',email:''}:[]));render()}}
 else if(a=='stripe'){window.open(d.u+'?prefilled_email='+encodeURIComponent(USER.email)+'&client_reference_id='+USER.id,'_blank','noopener');toast('Paiement Stripe ouvert dans un nouvel onglet')}
 else if(a=='cut')cutVid();else if(a=='prev')prevVid();else if(a=='find')findBest();else if(a=='segcut')cutSeg(segs[+d.i][0],segs[+d.i][1]);
-else if(a=='out'){sb.auth.signOut()}else if(a=='auth')doAuth()});
+else if(a=='out'){sb.auth.signOut()}else if(a=='auth'){el.disabled=true;doAuth().finally(()=>{el.disabled=false})}});
 document.addEventListener('change',e=>{if(e.target.dataset.a=='ig'){st.ideas=e.target.value;render()}
 if(e.target.dataset.a=='vf'){const f=e.target.files[0];if(!f)return;const v=$('#vp');v.src=URL.createObjectURL(f);v.style.display='block';v.onloadedmetadata=()=>{const d=v.duration;if(!isFinite(d))return vErr('Durée illisible : essaie un fichier MP4.');['rs','re'].forEach(i=>$('#'+i).max=d);$('#rs').value=0;$('#re').value=d;$('#ts').textContent='0';$('#te').textContent=d.toFixed(1);$('#vc').style.display='block';vErr('')};v.onerror=()=>vErr('Vidéo illisible dans ce navigateur.');v.ontimeupdate=()=>{if(vEnd&&v.currentTime>=vEnd){v.pause();vEnd=0}}}});
 document.addEventListener('input',e=>{if(e.target.id=='rs'||e.target.id=='re'){let s=+$('#rs').value,en=+$('#re').value;if(s>en){if(e.target.id=='rs')$('#rs').value=s=en;else $('#re').value=en=s}$('#ts').textContent=s.toFixed(1);$('#te').textContent=en.toFixed(1)}});
-addEventListener('hashchange',()=>{if(location.hash&&!location.hash.startsWith('#/'))return;render();scrollTo(0,0)});
+addEventListener('hashchange',()=>{if(location.hash&&!location.hash.startsWith('#/'))return;render();scrollTo(0,0);const r=$('#root');r.classList.remove('pg');void r.offsetWidth;r.classList.add('pg')});
 if(sb){sb.auth.onAuthStateChange((ev,ses)=>{setTimeout(async()=>{if(ev=='PASSWORD_RECOVERY'){USER=ses.user;location.hash='#/reset';return render()}await boot(ses);if(USER&&/^#\/(login|signup|forgot)/.test(location.hash))location.hash='#/app/overview';else render()},0)})}else render();
 </script></body></html>
